@@ -17,5 +17,12 @@
         "psr-4": {
             "IanRothmann\\Ain\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IanRothmann\\Ain\\ServiceProviders\\AinServiceProvider"
+            ]
+        }
     }
 }
