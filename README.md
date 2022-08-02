@@ -2,6 +2,4 @@
 
 Try it out with the Facade
 
-Ain::classifySentiment()
-    ->forSentences("I like apples")
-    ->get();
+`Ain::classifySentiment()->forSentences("I like apples")->get();`
