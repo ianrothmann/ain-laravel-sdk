@@ -1,0 +1,20 @@
+{
+    "name": "ianrothmann/ain-laravel-sdk",
+    "description": "SDK for use with AIN Laravel.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ian Rothmann",
+            "email": "ian@xtrapolate.io"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ianrothmann\\AinLaravelSdk\\": "src/"
+        }
+    }
+}
