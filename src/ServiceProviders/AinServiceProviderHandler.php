@@ -2,7 +2,7 @@
 
 namespace IanRothmann\Ain\ServiceProviders;
 
-use Ianrothmann\Ain\Handlers\AinHandlerConfig;
+use IanRothmann\Ain\Handlers\AinHandlerConfig;
 use IanRothmann\Ain\Handlers\Lib\AinRewriter;
 use IanRothmann\Ain\Handlers\Lib\AinSentimentClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;

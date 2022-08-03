@@ -2,7 +2,7 @@
 
 
 namespace IanRothmann\Ain\ServiceProviders;
-use Ianrothmann\Ain\Handlers\AinHandlerConfig;
+use IanRothmann\Ain\Handlers\AinHandlerConfig;
 use Illuminate\Support\ServiceProvider;
 
 class AinServiceProvider extends ServiceProvider

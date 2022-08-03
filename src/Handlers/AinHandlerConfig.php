@@ -1,6 +1,6 @@
 <?php
 
-namespace Ianrothmann\Ain\Handlers;
+namespace IanRothmann\Ain\Handlers;
 
 use IanRothmann\Ain\Http\AinHttp;
 
