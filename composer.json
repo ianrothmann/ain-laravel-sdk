@@ -22,7 +22,10 @@
         "laravel": {
             "providers": [
                 "IanRothmann\\Ain\\ServiceProviders\\AinServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Ain": "IanRothmann\\Ain\\Facades\\AinFacade"
+            }
         }
     }
 }
