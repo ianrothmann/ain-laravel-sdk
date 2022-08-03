@@ -12,7 +12,7 @@ class AinServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../Config/ain.php' => config_path('ain.php'),
-        ],'config');
+        ],'ain-config');
     }
 
     public function register()
