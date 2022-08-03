@@ -4,18 +4,31 @@ namespace IanRothmann\Ain\Handlers;
 
 use IanRothmann\Ain\Http\AinHttp;
 use Illuminate\Http\Client\Pool;
+use Illuminate\Support\Facades\Cache;
 
 abstract class AinHandler
 {
     protected AinHttp $http;
+    protected AinHandlerConfig $config;
     protected string $endpoint;
 
-    public function __construct(AinHttp $ainHttp)
+    public function __construct(AinHandlerConfig $config)
     {
-        $this->http=$ainHttp;
+        $this->config=$config;
+        $this->http=$this->config->http;
     }
 
-    abstract public function get();
+    abstract protected function getResult();
+    abstract protected function getMocked();
+
+    public function get()
+    {
+        if($this->config->mockType=='local'){
+            return $this->getMocked();
+        }else{
+            return $this->getResult();
+        }
+    }
 
     protected function postText($text, $opts=[])
     {
@@ -29,11 +42,10 @@ abstract class AinHandler
         $opts=collect($opts);
         $opts['list']=$list;
         return $this->http->post($this->endpoint,$opts->toArray());
-
     }
 
     //TODO: Investigate how this can work
-    protected function postAsync($list, $opts=[])
+   /* protected function postAsync($list, $opts=[])
     {
         $opts=collect($opts);
 
@@ -57,5 +69,5 @@ abstract class AinHandler
             ]
         ];
 
-    }
+    }*/
 }

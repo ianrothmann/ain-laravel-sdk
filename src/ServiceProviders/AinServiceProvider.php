@@ -2,6 +2,7 @@
 
 
 namespace IanRothmann\Ain\ServiceProviders;
+use Ianrothmann\Ain\Handlers\AinHandlerConfig;
 use Illuminate\Support\ServiceProvider;
 
 class AinServiceProvider extends ServiceProvider
@@ -10,7 +11,8 @@ class AinServiceProvider extends ServiceProvider
     {
         $this->app->bind('Ain', function()
         {
-            return new AinServiceProviderHandler(config('ain.url'),config('ain.key'));
+            $config=new AinHandlerConfig(config('ain.url'),config('ain.key'),config('ain.cache.type'),config('ain.cache.local_ttl'),config('ain.mock.type'));
+            return new AinServiceProviderHandler($config);
         });
     }
 }

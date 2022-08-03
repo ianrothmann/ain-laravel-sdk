@@ -2,7 +2,10 @@
 
 namespace IanRothmann\Ain\ServiceProviders;
 
+use Ianrothmann\Ain\Handlers\AinHandlerConfig;
+use IanRothmann\Ain\Handlers\Lib\AinRewriter;
 use IanRothmann\Ain\Handlers\Lib\AinSentimentClassifier;
+use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
 use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
 use IanRothmann\Ain\Http\AinHttp;
 use Illuminate\Support\Facades\Http;
@@ -11,42 +14,31 @@ use Illuminate\Support\Str;
 class AinServiceProviderHandler
 {
 
-    protected array $config;
-    protected AinHttp $http;
-    protected $shouldMock=false;
-    protected $shouldCache=true;
+    protected AinHandlerConfig $config;
 
-    public function __construct($url,$key)
+    public function __construct(AinHandlerConfig $config)
     {
-        $this->config=[
-            'key'=>$key,
-            'url'=>$url
-        ];
-        $this->http=new AinHttp($url,$key);
-    }
-
-    public function mocked()
-    {
-        $this->shouldMock=true;
-        $this->http->mock();
-        return $this;
-    }
-
-    public function force()
-    {
-        $this->shouldCache=false;
-        $this->http->force();
-        return $this;
+        $this->config=$config;
     }
 
     public function extractThemesFromText():AinThemeExtractor
     {
-        return new AinThemeExtractor($this->http);
+        return new AinThemeExtractor($this->config);
     }
 
     public function classifySentiment():AinSentimentClassifier
     {
-        return new AinSentimentClassifier($this->http);
+        return new AinSentimentClassifier($this->config);
+    }
+
+    public function languageCheck():AinSpellingGrammar
+    {
+        return new AinSpellingGrammar($this->config);
+    }
+
+    public function rewriter():AinRewriter
+    {
+        return new AinRewriter($this->config);
     }
 
 

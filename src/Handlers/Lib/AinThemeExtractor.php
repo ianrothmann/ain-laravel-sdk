@@ -47,12 +47,27 @@ class AinThemeExtractor extends AinHandler
         return $this;
     }
 
-    public function get()
+    public function getResult()
     {
         $result=$this->postText($this->text,[
             'pov'=>$this->pointOfView,
             'context'=>$this->context
         ]);
+
+        return new AinThemesResult($result);
+    }
+
+    public function getMocked()
+    {
+        $result=[
+            'data'=>[
+                'list'=>[
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum a sem dictum mattis et vitae arcu. Nunc ac diam odio. Morbi molestie libero magna, a sagittis ligula congue ac.',
+                    'Sed sit amet lorem ultrices, sodales ligula ac, tincidunt nulla.',
+                    'Duis iaculis erat non bibendum feugiat. Suspendisse sit amet blandit tellus. Suspendisse ut orci eget turpis facilisis dapibus at pharetra nisi.',
+                ]
+            ]
+        ];
 
         return new AinThemesResult($result);
     }
