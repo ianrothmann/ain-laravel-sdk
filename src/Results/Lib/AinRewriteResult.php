@@ -14,8 +14,8 @@ class AinRewriteResult extends AinResult
     public function __construct($httpResultArray)
     {
         parent::__construct($httpResultArray);
-        $this->newText=collect($this->data->get('text'));
-        $this->originalText=collect($this->data->get('original'));
+        $this->newText=$this->data->get('text');
+        $this->originalText=$this->data->get('original');
     }
 
     public function getNewText():string

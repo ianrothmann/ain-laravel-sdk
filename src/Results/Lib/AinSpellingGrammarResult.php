@@ -14,8 +14,8 @@ class AinSpellingGrammarResult extends AinResult
     public function __construct($httpResultArray)
     {
         parent::__construct($httpResultArray);
-        $this->correctedText=collect($this->data->get('text'));
-        $this->originalText=collect($this->data->get('original'));
+        $this->correctedText=$this->data->get('text');
+        $this->originalText=$this->data->get('original');
     }
 
     public function getCorrectedText():string
