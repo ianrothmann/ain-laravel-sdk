@@ -6,8 +6,8 @@ Try it out with the Ain Facade. Proper documentation will follow soon. Here are 
     public function tldr()
     {
         $result=\Ain::TLdr()
-        ->text($this->story)
-        ->get();
+            ->text($this->story)
+            ->get();
 
         dd($result);
     }
@@ -56,7 +56,7 @@ Try it out with the Ain Facade. Proper documentation will follow soon. Here are 
     public function grammar()
     {
         $result=\Ain::languageCheck()
-            ->forText($this->spelling)
+            ->text($this->spelling)
             ->get();
 
         dd($result);
@@ -64,9 +64,18 @@ Try it out with the Ain Facade. Proper documentation will follow soon. Here are 
 
     public function rewriter()
     {
-        $result=\Ain::rewriter()
-            ->forText($this->story)
-            ->setCreativityHigh()
+        $result=\Ain::rewrite()
+            ->text($this->story)
+            ->withHighCreativity()
+            ->get();
+
+        dd($result);
+    }
+
+    public function splitNames()
+    {
+        $result=\Ain::splitNames()
+            ->forList(['Ian Rothmann','Hill, Peter'])
             ->get();
 
         dd($result);

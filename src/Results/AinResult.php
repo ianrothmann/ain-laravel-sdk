@@ -18,4 +18,9 @@ abstract class AinResult
         return $this->tokens;
     }
 
+    public function dd()
+    {
+        dd($this);
+    }
+
 }

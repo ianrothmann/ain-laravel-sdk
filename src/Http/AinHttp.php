@@ -45,6 +45,8 @@ class AinHttp
             $data['force']=1;
         }
 
+        $data=collect($data)->toArray();
+
         if($pool){
             return $pool->as($poolId)->withToken($this->key)
                 ->acceptJson()
