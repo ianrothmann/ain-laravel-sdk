@@ -30,6 +30,16 @@ abstract class AinHandler
         }
     }
 
+    /**
+     * Bypass any possible caching that might be configured
+     */
+    public function force()
+    {
+        $this->config->cacheType='none';
+        $this->http->force();
+        return $this;
+    }
+
     protected function postText($text, $opts=[])
     {
         $opts=collect($opts);

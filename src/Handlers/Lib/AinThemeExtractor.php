@@ -13,7 +13,7 @@ class AinThemeExtractor extends AinHandler
     protected $pointOfView=null;
     protected string $endpoint='nlp/extract_themes';
 
-    public function forText($text)
+    public function fromText($text)
     {
         $this->text=$text;
         return $this;
@@ -47,6 +47,9 @@ class AinThemeExtractor extends AinHandler
         return $this;
     }
 
+    /**
+     * @return AinThemesResult
+     */
     public function getResult()
     {
         $result=$this->postText($this->text,[
@@ -57,6 +60,9 @@ class AinThemeExtractor extends AinHandler
         return new AinThemesResult($result);
     }
 
+    /**
+     * @return AinThemesResult
+     */
     public function getMocked()
     {
         $result=[

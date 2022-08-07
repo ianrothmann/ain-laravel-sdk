@@ -3,14 +3,13 @@
 namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
-use IanRothmann\Ain\Results\Lib\AinSpellingGrammarResult;
+use IanRothmann\Ain\Results\Lib\AinSummaryResult;
 
-
-class AinSpellingGrammar extends AinHandler
+class AinTLdr extends AinHandler
 {
-    protected string $inputText;
+    protected $inputText;
 
-    protected string $endpoint='nlp/grammar_spelling';
+    protected string $endpoint='nlp/tldr';
 
     public function text($text)
     {
@@ -19,16 +18,16 @@ class AinSpellingGrammar extends AinHandler
     }
 
     /**
-     * @return AinSpellingGrammarResult
+     * @return AinSummaryResult
      */
     public function getResult()
     {
         $result=$this->postText($this->inputText);
-        return new AinSpellingGrammarResult($result);
+        return new AinSummaryResult($result);
     }
 
     /**
-     * @return AinSpellingGrammarResult
+     * @return AinSummaryResult
      */
     public function getMocked()
     {
@@ -38,6 +37,6 @@ class AinSpellingGrammar extends AinHandler
                 'original'=>$this->inputText,
             ]
         ];
-        return new AinSpellingGrammarResult($result);
+        return new AinSummaryResult($result);
     }
 }

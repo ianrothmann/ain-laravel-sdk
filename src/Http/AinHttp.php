@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Http;
 
 class AinHttp
 {
-    protected string $url;
-    protected string $version='v1';
-    protected string $key;
+    protected $url;
+    protected $version='v1';
+    protected $key;
     protected $shouldMock=false;
     protected $shouldCache=true;
 
@@ -16,7 +16,7 @@ class AinHttp
      * @param string $url
      * @param string $key
      */
-    public function __construct(string $url, string $key)
+    public function __construct($url, $key)
     {
         $this->url = $url;
         $this->key = $key;

@@ -4,32 +4,40 @@ namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
 use IanRothmann\Ain\Results\Lib\AinSentimentResult;
-use IanRothmann\Ain\Results\Lib\AinSpellingGrammarResult;
-use IanRothmann\Ain\Results\Lib\AinThemesResult;
-
+use Illuminate\Support\Collection;
 
 class AinSentimentClassifier extends AinHandler
 {
-    protected array $sentences;
+    protected array $inputSentences;
     protected string $endpoint='nlp/sentiment';
 
+    /**
+     * @param array|Collection $arrayOfSentences
+     * @return $this
+     */
     public function forSentences($arrayOfSentences)
     {
-        $this->sentences=$arrayOfSentences;
+        $this->inputSentences=collect($arrayOfSentences)->toArray();
         return $this;
     }
 
+    /**
+     * @return AinSentimentResult
+     */
     public function getResult()
     {
-        $result=$this->postList($this->sentences);
+        $result=$this->postList($this->inputSentences);
 
         return new AinSentimentResult($result);
     }
 
+    /**
+     * @return AinSentimentResult
+     */
     public function getMocked()
     {
         $result=['data'=>[]];
-        $result['data']['list']=collect($this->sentences)->map(function($text){
+        $result['data']['list']=collect($this->inputSentences)->map(function($text){
             return [
                 'sentiment'=>'positive',
                 'score'=>0.5,
