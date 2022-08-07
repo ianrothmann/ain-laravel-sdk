@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'url'=>env('AIN_URL','http://ain.test'),
+    'url'=>env('AIN_URL','https://api.aininja.dev'),
     'key'=>env('AIN_KEY'),
     'cache'=>[
       'type'=>env('AIN_CACHE_TYPE','remote'),
