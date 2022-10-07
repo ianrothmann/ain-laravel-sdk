@@ -40,6 +40,17 @@ abstract class AinHandler
         return $this;
     }
 
+    public function httpGet($params=[])
+    {
+        return $this->http->get($this->endpoint,$params);
+    }
+
+    protected function post($opts=[])
+    {
+        $opts=collect($opts);
+        return $this->http->post($this->endpoint,$opts);
+    }
+
     protected function postText($text, $opts=[])
     {
         $opts=collect($opts);

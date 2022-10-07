@@ -9,6 +9,8 @@ class AinRewriter extends AinHandler
 {
     protected string $inputText;
     protected string $creativity='medium';
+    protected $level='';
+    protected $audience='';
 
     protected string $endpoint='nlp/rewrite';
 
@@ -36,14 +38,49 @@ class AinRewriter extends AinHandler
         return $this;
     }
 
+    public function forAcademicAudience()
+    {
+        $this->audience='academic';
+        return $this;
+    }
+
+    public function forBusinessAudience()
+    {
+        $this->audience='business';
+        return $this;
+    }
+
+    public function targetGradeLevel($level)
+    {
+        if(intval($level)!=$level){
+            throw new \Exception("Level must be an integer between 1 and 12.");
+        }
+        if($level < 1 || $level > 12){
+            throw new \Exception("Level must be an integer between 1 and 12.");
+        }
+        $this->targetLevel=$level;
+        return $this;
+    }
+
+
     /**
      * @return AinRewriteResult
      */
     public function getResult()
     {
-        $result=$this->postText($this->inputText,[
-            'creativity'=>$this->creativity
-        ]);
+        $data=[
+            'creativity'=>$this->creativity,
+        ];
+
+        if($this->level){
+            $data['grade_level']=$this->level;
+        }
+
+        if($this->audience){
+            $data['audience']=$this->audience;
+        }
+
+        $result=$this->postText($this->inputText,$data);
         return new AinRewriteResult($result);
     }
 

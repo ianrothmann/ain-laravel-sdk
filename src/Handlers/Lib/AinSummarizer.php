@@ -38,7 +38,7 @@ class AinSummarizer extends AinHandler
      * @return $this
      * @throws \Exception
      */
-    public function forTargetGradeLevel($level)
+    public function targetGradeLevel($level)
     {
         if(intval($level)!=$level){
             throw new \Exception("Level must be an integer between 1 and 12.");

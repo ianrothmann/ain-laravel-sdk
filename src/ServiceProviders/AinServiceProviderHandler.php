@@ -3,17 +3,20 @@
 namespace IanRothmann\Ain\ServiceProviders;
 
 use IanRothmann\Ain\Handlers\AinHandlerConfig;
+use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
+use IanRothmann\Ain\Handlers\Lib\AinModel;
 use IanRothmann\Ain\Handlers\Lib\AinNameSurnameSplitter;
+use IanRothmann\Ain\Handlers\Lib\AinRatingClassifier;
+use IanRothmann\Ain\Handlers\Lib\AinRatingModelBuilder;
 use IanRothmann\Ain\Handlers\Lib\AinRewriter;
 use IanRothmann\Ain\Handlers\Lib\AinSentimentClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinTLdr;
-use IanRothmann\Ain\Http\AinHttp;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
+use IanRothmann\Ain\Results\Lib\AinModelResult;
+
 
 class AinServiceProviderHandler
 {
@@ -23,6 +26,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function embeddings():AinEmbeddings
+    {
+        return new AinEmbeddings($this->config);
     }
 
     public function extractThemes():AinThemeExtractor
@@ -66,6 +74,21 @@ class AinServiceProviderHandler
     public function splitNames():AinNameSurnameSplitter
     {
         return new AinNameSurnameSplitter($this->config);
+    }
+
+    public function model($name):AinModelResult
+    {
+        return (new AinModel($this->config))->name($name)->get();
+    }
+
+    public function trainRatingClassifier():AinRatingModelBuilder
+    {
+        return new AinRatingModelBuilder($this->config);
+    }
+
+    public function classifyRating():AinRatingClassifier
+    {
+        return new AinRatingClassifier($this->config);
     }
 
 
