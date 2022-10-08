@@ -15,6 +15,7 @@ use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinTLdr;
+use IanRothmann\Ain\Handlers\Lib\AinTopicFromList;
 use IanRothmann\Ain\Results\Lib\AinModelResult;
 
 
@@ -31,6 +32,11 @@ class AinServiceProviderHandler
     public function embeddings():AinEmbeddings
     {
         return new AinEmbeddings($this->config);
+    }
+
+    public function topicFromList():AinTopicFromList
+    {
+        return new AinTopicFromList($this->config);
     }
 
     public function extractThemes():AinThemeExtractor
