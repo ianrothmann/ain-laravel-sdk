@@ -3,6 +3,8 @@
 namespace IanRothmann\Ain\ServiceProviders;
 
 use IanRothmann\Ain\Handlers\AinHandlerConfig;
+use IanRothmann\Ain\Handlers\Lib\AinAnalysis;
+use IanRothmann\Ain\Handlers\Lib\AinDataset;
 use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinModel;
@@ -15,6 +17,7 @@ use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinTLdr;
+use IanRothmann\Ain\Handlers\Lib\AinTopicAnalysis;
 use IanRothmann\Ain\Handlers\Lib\AinTopicFromList;
 use IanRothmann\Ain\Results\Lib\AinModelResult;
 
@@ -27,6 +30,21 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function topicAnalysis():AinTopicAnalysis
+    {
+        return new AinTopicAnalysis($this->config);
+    }
+
+    public function analysis():AinAnalysis
+    {
+        return new AinAnalysis($this->config);
+    }
+
+    public function dataset():AinDataset
+    {
+        return new AinDataset($this->config);
     }
 
     public function embeddings():AinEmbeddings
