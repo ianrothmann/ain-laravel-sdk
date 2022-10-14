@@ -102,7 +102,11 @@ class AinServiceProviderHandler
 
     public function model($name):AinModelResult
     {
-        return (new AinModel($this->config))->name($name)->get();
+        $result=(new AinModel($this->config))->name($name)->get();
+        if(!$result){
+            throw new \Exception("Model {$name} not found.");
+        }
+        return $result;
     }
 
     public function trainRatingClassifier():AinRatingModelBuilder

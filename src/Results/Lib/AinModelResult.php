@@ -30,4 +30,9 @@ class AinModelResult extends AinResult
     {
         return collect($this->modelData->get('params'));
     }
+
+    public function getTrainingResults():Collection
+    {
+        return collect($this->modelData->get('training_results'));
+    }
 }

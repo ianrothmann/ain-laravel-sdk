@@ -37,14 +37,18 @@ class AinHttp
     public function get($endpoint, $params=[])
     {
         $url=$this->url.'/api/'.$this->version.'/'.$endpoint;
-        return Http::withToken($this->key)
-            ->acceptJson()
-            ->timeout(180)
-            ->retry(3,500)
-            ->get($url,$params)
-            ->throw(function($response, $e){
-                return $e;
-            })->json();
+        try{
+            return Http::withToken($this->key)
+                ->acceptJson()
+                ->timeout(180)
+                ->retry(3,500)
+                ->get($url,$params)
+                ->throw(function($response, $e){
+                    return $e;
+                })->json();
+        }catch (\Throwable $e){
+            throw new \Exception($e->getMessage());
+        }
     }
 
     public function post($endpoint, $data, $pool=null, $poolId=null)

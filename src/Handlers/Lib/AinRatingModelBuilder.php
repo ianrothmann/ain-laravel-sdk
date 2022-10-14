@@ -76,10 +76,6 @@ class AinRatingModelBuilder extends AinHandler
             throw new \Exception('Question is required');
         }
 
-        if(collect($this->ratingCategories)->isEmpty()){
-            throw new \Exception('Rating categories are required');
-        }
-
         if(!$this->fileUrl){
             throw new \Exception('No file url provided');
         }
