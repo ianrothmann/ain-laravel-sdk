@@ -9,6 +9,7 @@ use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinModel;
 use IanRothmann\Ain\Handlers\Lib\AinNameSurnameSplitter;
+use IanRothmann\Ain\Handlers\Lib\AinQuestionAnswering;
 use IanRothmann\Ain\Handlers\Lib\AinRatingClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinRatingModelBuilder;
 use IanRothmann\Ain\Handlers\Lib\AinRewriter;
@@ -60,6 +61,11 @@ class AinServiceProviderHandler
     public function extractThemes():AinThemeExtractor
     {
         return new AinThemeExtractor($this->config);
+    }
+
+    public function answerQuestion():AinQuestionAnswering
+    {
+        return new AinQuestionAnswering($this->config);
     }
 
     public function classifySentiment():AinSentimentClassifier
