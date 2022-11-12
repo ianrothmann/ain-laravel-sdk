@@ -15,6 +15,7 @@ use IanRothmann\Ain\Handlers\Lib\AinRatingModelBuilder;
 use IanRothmann\Ain\Handlers\Lib\AinRewriter;
 use IanRothmann\Ain\Handlers\Lib\AinSentimentClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
+use IanRothmann\Ain\Handlers\Lib\AinSQLDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinTLdr;
@@ -31,6 +32,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function describeSQL():AinSQLDescriber
+    {
+        return new AinSQLDescriber($this->config);
     }
 
     public function topicAnalysis():AinTopicAnalysis

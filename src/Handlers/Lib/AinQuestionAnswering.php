@@ -49,7 +49,7 @@ class AinQuestionAnswering extends AinHandler
     }
 
     /**
-     * @return AinSummaryResult
+     * @return AinQuestionAnsweringResult
      */
     public function getMocked()
     {

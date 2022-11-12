@@ -41,7 +41,7 @@ class AinHttp
             return Http::withToken($this->key)
                 ->acceptJson()
                 ->timeout(180)
-                ->retry(3,500)
+                ->retry(3,500)->dd()
                 ->get($url,$params)
                 ->throw(function($response, $e){
                     return $e;

@@ -18,6 +18,11 @@ class AinQuestionAnsweringResult extends AinResult
         $this->originalText=$this->data->get('original');
     }
 
+    public function getAnswer():string
+    {
+        return $this->newText;
+    }
+
     public function getNewText():string
     {
         return $this->newText;
