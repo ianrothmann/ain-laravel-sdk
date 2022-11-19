@@ -13,7 +13,11 @@ class AinThemesResult extends AinResult
     public function __construct($httpResultArray)
     {
         parent::__construct($httpResultArray);
-        $this->themes=collect($this->data->get('list'));
+        if($this->multipleResults){
+            $this->themes=$this->mapResult('list');
+        }else{
+            $this->themes=collect($this->data->get('list'));
+        }
     }
 
     public function getThemes():Collection

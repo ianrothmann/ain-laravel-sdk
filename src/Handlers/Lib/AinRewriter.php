@@ -7,7 +7,7 @@ use IanRothmann\Ain\Results\Lib\AinRewriteResult;
 
 class AinRewriter extends AinHandler
 {
-    protected string $inputText;
+    protected $inputText;
     protected string $creativity='medium';
     protected $level='';
     protected $audience='';

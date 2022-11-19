@@ -14,16 +14,22 @@ class AinRewriteResult extends AinResult
     public function __construct($httpResultArray)
     {
         parent::__construct($httpResultArray);
-        $this->newText=$this->data->get('text');
-        $this->originalText=$this->data->get('original');
+
+        if($this->multipleResults){
+            $this->newText=$this->mapResult('text');
+            $this->originalText=$this->mapResult('original');
+        }else{
+            $this->newText=$this->data->get('text');
+            $this->originalText=$this->data->get('original');
+        }
     }
 
-    public function getNewText():string
+    public function getNewText()
     {
         return $this->newText;
     }
 
-    public function getOriginalText():string
+    public function getOriginalText()
     {
         return $this->originalText;
     }

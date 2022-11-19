@@ -8,7 +8,7 @@ use IanRothmann\Ain\Results\Lib\AinThemesResult;
 
 class AinThemeExtractor extends AinHandler
 {
-    protected string $text;
+    protected $text;
     protected string $context='';
     protected $pointOfView=null;
     protected string $endpoint='nlp/extract_themes';

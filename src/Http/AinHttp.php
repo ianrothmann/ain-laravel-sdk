@@ -8,7 +8,7 @@ class AinHttp
 {
     protected $url;
     protected $version='v1';
-    protected $key;
+    public $key;
     protected $shouldMock=false;
     protected $shouldCache=true;
 
@@ -34,6 +34,14 @@ class AinHttp
         return $this;
     }
 
+    public function postAsync($endpoint, $callable)
+    {
+        $url=$this->url.'/api/'.$this->version.'/'.$endpoint;
+        return Http::withToken($this->key)->pool(function($pool) use($callable,$url){
+            return $callable($url,$pool);
+        });
+    }
+
     public function get($endpoint, $params=[])
     {
         $url=$this->url.'/api/'.$this->version.'/'.$endpoint;
@@ -41,7 +49,7 @@ class AinHttp
             return Http::withToken($this->key)
                 ->acceptJson()
                 ->timeout(180)
-                ->retry(3,500)->dd()
+                ->retry(3,500)
                 ->get($url,$params)
                 ->throw(function($response, $e){
                     return $e;

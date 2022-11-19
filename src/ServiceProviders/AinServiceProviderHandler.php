@@ -131,5 +131,4 @@ class AinServiceProviderHandler
         return new AinRatingClassifier($this->config);
     }
 
-
 }

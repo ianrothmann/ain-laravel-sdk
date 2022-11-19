@@ -53,6 +53,11 @@ abstract class AinHandler
 
     protected function postText($text, $opts=[])
     {
+        if(collect($text)->count()>1){
+            return $this->postAsync($text, $opts);
+        }else{
+            $text=collect($text)->first();
+        }
         $opts=collect($opts);
         $opts['text']=$text;
         return $this->http->post($this->endpoint,$opts);
@@ -63,6 +68,25 @@ abstract class AinHandler
         $opts=collect($opts);
         $opts['list']=$list;
         return $this->http->post($this->endpoint,$opts->toArray());
+    }
+
+    protected function postAsync($list, $opts=[])
+    {
+        return collect($list)
+            ->chunk(10)
+            ->map(function($chunk) use ($opts){
+                sleep(1);
+                return $this->http->postAsync($this->endpoint,function ($url, $pool) use ($chunk, $opts) {
+                    return $chunk->map(function($text, $key) use($pool, $opts, $url){
+                        return $pool->as($key)
+                            ->acceptJson()
+                            ->withToken($this->http->key)
+                            ->post($url, array_merge($opts, ['text'=>$text]));
+                    })->toArray();
+                });
+            })->mapWithKeys(fn($response)=>$response)->map(function($response){
+                return $response->json();
+            });
     }
 
     //TODO: Investigate how this can work
