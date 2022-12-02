@@ -8,7 +8,7 @@ use IanRothmann\Ain\Results\Lib\AinSpellingGrammarResult;
 
 class AinSpellingGrammar extends AinHandler
 {
-    protected string $inputText;
+    protected $inputText;
 
     protected string $endpoint='nlp/grammar_spelling';
 
