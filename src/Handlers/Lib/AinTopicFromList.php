@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 class AinTopicFromList extends AinHandler
 {
     protected array $list;
+    protected $context;
     protected string $endpoint='nlp/statements2topic';
 
     /**
@@ -22,12 +23,20 @@ class AinTopicFromList extends AinHandler
         return $this;
     }
 
+    public function withContext($context)
+    {
+        $this->context=$context;
+        return $this;
+    }
+
     /**
      * @return AinTopicFromListResult
      */
     public function getResult()
     {
-        $result=$this->postList($this->list);
+        $result=$this->postList($this->list,[
+            'context'=>$this->context
+        ]);
 
         return new AinTopicFromListResult($result);
     }
