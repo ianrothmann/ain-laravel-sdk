@@ -73,9 +73,11 @@ abstract class AinHandler
     protected function postAsync($list, $opts=[])
     {
         return collect($list)
-            ->chunk(10)
-            ->map(function($chunk) use ($opts){
-                sleep(1);
+            ->chunk(2)
+            ->map(function($chunk,$chunkIndex) use ($opts){
+                if($chunkIndex>=1){
+                    sleep(2);
+                }
                 return $this->http->postAsync($this->endpoint,function ($url, $pool) use ($chunk, $opts) {
                     return $chunk->map(function($text, $key) use($pool, $opts, $url){
                         return $pool->as($key)

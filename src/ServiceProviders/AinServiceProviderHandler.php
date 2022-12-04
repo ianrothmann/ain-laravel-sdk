@@ -8,6 +8,7 @@ use IanRothmann\Ain\Handlers\Lib\AinDataset;
 use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinModel;
+use IanRothmann\Ain\Handlers\Lib\AinMultiStatementSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinNameSurnameSplitter;
 use IanRothmann\Ain\Handlers\Lib\AinQuestionAnswering;
 use IanRothmann\Ain\Handlers\Lib\AinRatingClassifier;
@@ -21,6 +22,7 @@ use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinTLdr;
 use IanRothmann\Ain\Handlers\Lib\AinTopicAnalysis;
 use IanRothmann\Ain\Handlers\Lib\AinTopicFromList;
+use IanRothmann\Ain\Handlers\Lib\AinTopicProbe;
 use IanRothmann\Ain\Results\Lib\AinModelResult;
 
 
@@ -32,6 +34,16 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function summarizeStatements():AinMultiStatementSummarizer
+    {
+        return new AinMultiStatementSummarizer($this->config);
+    }
+
+    public function probeTopics():AinTopicProbe
+    {
+        return new AinTopicProbe($this->config);
     }
 
     public function describeSQL():AinSQLDescriber
