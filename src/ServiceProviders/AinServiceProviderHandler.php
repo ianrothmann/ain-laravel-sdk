@@ -19,6 +19,7 @@ use IanRothmann\Ain\Handlers\Lib\AinSentimentClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
 use IanRothmann\Ain\Handlers\Lib\AinSQLDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizer;
+use IanRothmann\Ain\Handlers\Lib\AinSummarizeTranscription;
 use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinTLdr;
 use IanRothmann\Ain\Handlers\Lib\AinTopicAnalysis;
@@ -40,6 +41,11 @@ class AinServiceProviderHandler
     public function generateInterviewQuestions():AinInterviewQuestionGenerator
     {
         return new AinInterviewQuestionGenerator($this->config);
+    }
+
+    public function summarizeTranscript():AinSummarizeTranscription
+    {
+        return new AinSummarizeTranscription($this->config);
     }
 
     public function summarizeStatements():AinMultiStatementSummarizer
