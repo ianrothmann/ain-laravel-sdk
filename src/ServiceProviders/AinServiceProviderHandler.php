@@ -6,6 +6,7 @@ use IanRothmann\Ain\Handlers\AinHandlerConfig;
 use IanRothmann\Ain\Handlers\Lib\AinAnalysis;
 use IanRothmann\Ain\Handlers\Lib\AinDataset;
 use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
+use IanRothmann\Ain\Handlers\Lib\AinInterviewQuestionGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinModel;
 use IanRothmann\Ain\Handlers\Lib\AinMultiStatementSummarizer;
@@ -34,6 +35,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function generateInterviewQuestions():AinInterviewQuestionGenerator
+    {
+        return new AinInterviewQuestionGenerator($this->config);
     }
 
     public function summarizeStatements():AinMultiStatementSummarizer
