@@ -23,6 +23,7 @@ use IanRothmann\Ain\Handlers\Lib\AinSummarizeTranscription;
 use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinTLdr;
 use IanRothmann\Ain\Handlers\Lib\AinTopicAnalysis;
+use IanRothmann\Ain\Handlers\Lib\AinTopicDescriptionsToNames;
 use IanRothmann\Ain\Handlers\Lib\AinTopicFromList;
 use IanRothmann\Ain\Handlers\Lib\AinTopicProbe;
 use IanRothmann\Ain\Results\Lib\AinModelResult;
@@ -36,6 +37,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function nameTopicsFromDescriptions():AinTopicDescriptionsToNames
+    {
+        return new AinTopicDescriptionsToNames($this->config);
     }
 
     public function generateInterviewQuestions():AinInterviewQuestionGenerator
