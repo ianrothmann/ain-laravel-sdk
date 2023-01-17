@@ -77,7 +77,7 @@ class AinHttp
                 ->acceptJson()
                 ->timeout(180)
                 ->retry(3,500)
-                ->post($url,$data)
+                ->post($url,$data)->json();
              /*   ->throw(function($response, $e){
                     return $e;
                 })->json()*/;
