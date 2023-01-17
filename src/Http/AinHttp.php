@@ -72,12 +72,12 @@ class AinHttp
 
         $data=collect($data)->toArray();
 
-        if($pool){
+        if($pool && false){
             return $pool->as($poolId)->withToken($this->key)
                 ->acceptJson()
                 ->timeout(180)
                 ->retry(3,500)
-                ->post($url,$data)->json();
+                ->post($url,$data);
              /*   ->throw(function($response, $e){
                     return $e;
                 })->json()*/;
