@@ -26,7 +26,6 @@ class AinTopicDescriptionsToNames extends AinHandler
     public function getResult()
     {
         $result=$this->postList($this->descriptionList);
-        dd($result);
         return new AinThemesResult($result);
     }
 
