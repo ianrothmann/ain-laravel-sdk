@@ -20,6 +20,8 @@ use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
 use IanRothmann\Ain\Handlers\Lib\AinSQLDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizeTranscription;
+use IanRothmann\Ain\Handlers\Lib\AinThematicAnalysis;
+use IanRothmann\Ain\Handlers\Lib\AinThematicAnalysisInclusionDecision;
 use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinTLdr;
 use IanRothmann\Ain\Handlers\Lib\AinTopicAnalysis;
@@ -37,6 +39,16 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function thematicAnalysis():AinThematicAnalysis
+    {
+        return new AinThematicAnalysis($this->config);
+    }
+
+    public function decideToIncludeInThematicAnalysis():AinThematicAnalysisInclusionDecision
+    {
+        return new AinThematicAnalysisInclusionDecision($this->config);
     }
 
     public function nameTopicsFromDescriptions():AinTopicDescriptionsToNames
