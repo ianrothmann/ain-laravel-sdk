@@ -33,7 +33,7 @@ class AinThematicAnalysis extends AinHandler
         $result=$this->postText($this->inputText,[
             'context'=>$this->context
         ]);
-        dd($result);
+
         return new AinDescribedThemesResult($result);
     }
 
