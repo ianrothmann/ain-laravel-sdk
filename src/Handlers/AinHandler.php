@@ -73,7 +73,7 @@ abstract class AinHandler
     protected function postAsync($list, $opts=[])
     {
         return collect($list)
-            ->chunk(5)
+            ->chunk(10)
             ->map(function($chunk,$chunkIndex) use ($opts){
                 if($chunkIndex>=1){
                     sleep(1);
