@@ -10,6 +10,7 @@ class AinThematicAnalysis extends AinHandler
 {
     protected $inputText;
     protected $context;
+    protected $firstPerson=true;
 
     protected string $endpoint='nlp/thematic_analysis';
 
@@ -25,13 +26,20 @@ class AinThematicAnalysis extends AinHandler
         return $this;
     }
 
+    public function inFirstPerson($firstPerson=true)
+    {
+        $this->firstPerson=$firstPerson;
+        return $this;
+    }
+
     /**
      * @return AinDescribedThemesResult
      */
     public function getResult()
     {
         $result=$this->postText($this->inputText,[
-            'context'=>$this->context
+            'context'=>$this->context,
+            'first_person'=>$this->firstPerson
         ]);
 
         return new AinDescribedThemesResult($result);
