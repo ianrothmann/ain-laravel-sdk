@@ -9,6 +9,7 @@ class AinDescribedThemesResult extends AinResult
 {
 
     protected $themes;
+    protected $multipleResults=true;
 
     public function __construct($httpResultArray)
     {

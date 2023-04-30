@@ -37,6 +37,10 @@ abstract class AinResult
     public function mapResult($keyToMap)
     {
         return $this->data->mapWithKeys(function($item, $key) use($keyToMap){
+            $item=collect($item);
+            if(!$item->get($keyToMap)){
+                $item=collect(collect($item)->first());
+            }
             return [$key => $item->get($keyToMap)];
         });
     }
