@@ -63,6 +63,13 @@ abstract class AinHandler
         return $this->http->post($this->endpoint,$opts);
     }
 
+    protected function postTextAsArray($textArray, $opts=[])
+    {
+        $opts=collect($opts);
+        $opts['text']=$textArray;
+        return $this->http->post($this->endpoint,$opts);
+    }
+
     protected function postList($list, $opts=[])
     {
         $opts=collect($opts);

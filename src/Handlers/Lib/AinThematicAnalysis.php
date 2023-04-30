@@ -37,7 +37,7 @@ class AinThematicAnalysis extends AinHandler
      */
     public function getResult()
     {
-        $result=$this->postText($this->inputText,[
+        $result=$this->postTextAsArray($this->inputText,[
             'context'=>$this->context,
             'first_person'=>$this->firstPerson
         ]);
