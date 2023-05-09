@@ -11,6 +11,7 @@ use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinModel;
 use IanRothmann\Ain\Handlers\Lib\AinMultiStatementSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinNameSurnameSplitter;
+use IanRothmann\Ain\Handlers\Lib\AinPsychometricScorer;
 use IanRothmann\Ain\Handlers\Lib\AinQuestionAnswering;
 use IanRothmann\Ain\Handlers\Lib\AinRatingClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinRatingModelBuilder;
@@ -39,6 +40,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function scorePsychometric():AinPsychometricScorer
+    {
+        return new AinPsychometricScorer($this->config);
     }
 
     public function thematicAnalysis():AinThematicAnalysis
