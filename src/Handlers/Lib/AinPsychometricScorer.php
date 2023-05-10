@@ -17,7 +17,14 @@ class AinPsychometricScorer extends AinHandler
     public function forModel($name)
     {
         $this->modelName=$name;
-        $this->endpoint.=$name.'/score';
+        $this->endpoint.='score/'.$name;
+        return $this;
+    }
+
+    public function forModels(array $modelNameArray)
+    {
+        $this->modelName=$modelNameArray;
+        $this->endpoint.='score';
         return $this;
     }
 
@@ -33,7 +40,7 @@ class AinPsychometricScorer extends AinHandler
     public function getResult()
     {
         try{
-            $result=$this->post(['data'=>$this->data]);
+            $result=$this->post(['data'=>$this->data,'models'=>$this->modelName]);
             return new AinPsychometricScoreResult($result['data']);
         }catch (\Exception $e){
             throw new \Exception($e->getMessage());
