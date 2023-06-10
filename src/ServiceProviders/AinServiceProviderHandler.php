@@ -29,6 +29,7 @@ use IanRothmann\Ain\Handlers\Lib\AinTopicAnalysis;
 use IanRothmann\Ain\Handlers\Lib\AinTopicDescriptionsToNames;
 use IanRothmann\Ain\Handlers\Lib\AinTopicFromList;
 use IanRothmann\Ain\Handlers\Lib\AinTopicProbe;
+use IanRothmann\Ain\Handlers\Lib\AinTraitSummarizer;
 use IanRothmann\Ain\Results\Lib\AinModelResult;
 
 
@@ -40,6 +41,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function summarizeTraits():AinTraitSummarizer
+    {
+        return new AinTraitSummarizer($this->config);
     }
 
     public function scorePsychometric():AinPsychometricScorer
