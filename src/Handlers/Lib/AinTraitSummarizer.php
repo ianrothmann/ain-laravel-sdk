@@ -28,7 +28,7 @@ class AinTraitSummarizer extends AinHandler
     }
 
 
-    public function addStatement($ref, $text, $lowScore, $highScore, $highInclusive=false)
+    public function addStatement($ref, $text, $lowScore=null, $highScore=null, $highInclusive=false)
     {
         $this->statements->push([
             'ref'=>$ref,
@@ -44,6 +44,21 @@ class AinTraitSummarizer extends AinHandler
     {
         $this->scores=collect($scoreArrayKeyedByRef);
         return $this;
+    }
+
+    public function withoutScores()
+    {
+        $this->statements->transform(function($statement){
+            $statement['low_score']=1;
+            $statement['high_score']=1;
+            $statement['high_score_inclusive']=true;
+            return $statement;
+        });
+
+        $this->scores=$this->statements->keyBy('ref')
+            ->map(function($statement){
+                return $statement['low_score'];
+            });
     }
 
     public function withSpecificContext($context)
