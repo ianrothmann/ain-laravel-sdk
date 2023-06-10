@@ -11,6 +11,8 @@ class AinRewriter extends AinHandler
     protected string $creativity='medium';
     protected $level='';
     protected $audience='';
+    protected $context=null;
+    protected $instruction=null;
 
     protected string $endpoint='nlp/rewrite';
 
@@ -62,6 +64,18 @@ class AinRewriter extends AinHandler
         return $this;
     }
 
+    public function withSpecificContext($context)
+    {
+        $this->context=$context;
+        return $this;
+    }
+
+    public function withSpecificInstruction($instruction)
+    {
+        $this->instruction=$instruction;
+        return $this;
+    }
+
 
     /**
      * @return AinRewriteResult
@@ -74,6 +88,14 @@ class AinRewriter extends AinHandler
 
         if($this->level){
             $data['grade_level']=$this->level;
+        }
+
+        if($this->instruction){
+            $data['instruction']=$this->instruction;
+        }
+
+        if($this->context){
+            $data['context']=$this->context;
         }
 
         if($this->audience){
