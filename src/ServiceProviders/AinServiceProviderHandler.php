@@ -4,8 +4,11 @@ namespace IanRothmann\Ain\ServiceProviders;
 
 use IanRothmann\Ain\Handlers\AinHandlerConfig;
 use IanRothmann\Ain\Handlers\Lib\AinAnalysis;
+use IanRothmann\Ain\Handlers\Lib\AinAudioTranscriber;
 use IanRothmann\Ain\Handlers\Lib\AinDataset;
 use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
+use IanRothmann\Ain\Handlers\Lib\AinFaceDescriber;
+use IanRothmann\Ain\Handlers\Lib\AinImageDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewQuestionGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinModel;
@@ -41,6 +44,21 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function transcribe():AinAudioTranscriber
+    {
+        return new AinAudioTranscriber($this->config);
+    }
+
+    public function analyzeFace(): AinFaceDescriber
+    {
+        return new AinFaceDescriber($this->config);
+    }
+
+    public function analyzeImage(): AinImageDescriber
+    {
+        return new AinImageDescriber($this->config);
     }
 
     public function summarizeTraits():AinTraitSummarizer
