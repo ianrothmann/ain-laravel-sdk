@@ -15,6 +15,9 @@ class AinAudioTranscriber extends AinHandler
     protected $shouldComplement=false;
 
     protected $name;
+    protected $context;
+    protected $language;
+    protected $question;
 
     protected string $endpoint='audio/transcribe';
 
@@ -27,6 +30,24 @@ class AinAudioTranscriber extends AinHandler
     public function byName($name)
     {
         $this->name=$name;
+        return $this;
+    }
+
+    public function withSpeakerContext($context)
+    {
+        $this->context=$context;
+        return $this;
+    }
+
+    public function isLanguage($language)
+    {
+        $this->language=$language;
+        return $this;
+    }
+
+    public function wasAskedAQuestion($question)
+    {
+        $this->question=$question;
         return $this;
     }
 
@@ -51,7 +72,10 @@ class AinAudioTranscriber extends AinHandler
             'url'=>$this->url,
             'summarize'=>$this->shouldSummarize,
             'complement'=>$this->shouldComplement,
-            'name'=>$this->name
+            'name'=>$this->name,
+            'context'=>$this->context,
+            'question'=>$this->question,
+            'language'=>$this->language,
         ]);
 
         return new AinTranscriptionResult($result);

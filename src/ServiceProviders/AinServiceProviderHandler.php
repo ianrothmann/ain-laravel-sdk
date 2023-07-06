@@ -22,6 +22,8 @@ use IanRothmann\Ain\Handlers\Lib\AinRewriter;
 use IanRothmann\Ain\Handlers\Lib\AinSentimentClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
 use IanRothmann\Ain\Handlers\Lib\AinSQLDescriber;
+use IanRothmann\Ain\Handlers\Lib\AinSummarizeContext;
+use IanRothmann\Ain\Handlers\Lib\AinSummarizeConversation;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizeTranscription;
 use IanRothmann\Ain\Handlers\Lib\AinThematicAnalysis;
@@ -44,6 +46,16 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function summarizeConversation():AinSummarizeConversation
+    {
+        return new AinSummarizeConversation($this->config);
+    }
+
+    public function summarizeContext():AinSummarizeContext
+    {
+        return new AinSummarizeContext($this->config);
     }
 
     public function transcribe():AinAudioTranscriber

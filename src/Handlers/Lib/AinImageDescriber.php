@@ -15,10 +15,17 @@ class AinImageDescriber extends AinHandler
 
     protected bool $shouldDescribe=true;
     protected bool $shouldComplement=false;
+    protected $context;
 
     public function fromUrl($url)
     {
         $this->url=$url;
+        return $this;
+    }
+
+    public function inContextOf($context)
+    {
+        $this->context=$context;
         return $this;
     }
 
@@ -35,16 +42,17 @@ class AinImageDescriber extends AinHandler
     }
 
     /**
-     * @return AinFaceResult
+     * @return AinDescriptionResult
      */
     public function getResult()
     {
         $result=$this->post([
             'url'=>$this->url,
             'complement'=>$this->shouldComplement,
-            'describe'=>$this->shouldDescribe
+            'describe'=>$this->shouldDescribe,
+            'context'=>$this->context
         ]);
-        return new AinFaceResult($result);
+        return new AinDescriptionResult($result);
     }
 
     /**
