@@ -16,6 +16,7 @@ use IanRothmann\Ain\Handlers\Lib\AinMultiStatementSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinNameSurnameSplitter;
 use IanRothmann\Ain\Handlers\Lib\AinPsychometricScorer;
 use IanRothmann\Ain\Handlers\Lib\AinQuestionAnswering;
+use IanRothmann\Ain\Handlers\Lib\AinQuestionChatNavigator;
 use IanRothmann\Ain\Handlers\Lib\AinRatingClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinRatingModelBuilder;
 use IanRothmann\Ain\Handlers\Lib\AinRewriter;
@@ -46,6 +47,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function navigateQuestionChat():AinQuestionChatNavigator
+    {
+        return new AinQuestionChatNavigator($this->config);
     }
 
     public function summarizeConversation():AinSummarizeConversation

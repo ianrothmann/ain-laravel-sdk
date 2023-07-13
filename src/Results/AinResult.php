@@ -11,6 +11,11 @@ abstract class AinResult
     public function __construct($httpResultArray)
     {
         $httpResultArray=collect($httpResultArray);
+
+        if($httpResultArray->has('error')){
+            throw new \Exception($httpResultArray->get('error'));
+        }
+
         if(!$httpResultArray->has('data')){
             $this->data=$httpResultArray->map(function($data){
                 return collect(collect($data)->get('data'));
