@@ -4,12 +4,14 @@ namespace IanRothmann\Ain\ServiceProviders;
 
 use IanRothmann\Ain\Handlers\AinHandlerConfig;
 use IanRothmann\Ain\Handlers\Lib\AinAnalysis;
+use IanRothmann\Ain\Handlers\Lib\AinAudioTopicExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinAudioTranscriber;
 use IanRothmann\Ain\Handlers\Lib\AinDataset;
 use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
 use IanRothmann\Ain\Handlers\Lib\AinFaceDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinImageDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewQuestionGenerator;
+use IanRothmann\Ain\Handlers\Lib\AinInterviewReportWriter;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinModel;
 use IanRothmann\Ain\Handlers\Lib\AinMultiStatementSummarizer;
@@ -47,6 +49,16 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function writeInterviewReport():AinInterviewReportWriter
+    {
+        return new AinInterviewReportWriter($this->config);
+    }
+
+    public function extractTopicsFromAudio():AinAudioTopicExtractor
+    {
+        return new AinAudioTopicExtractor($this->config);
     }
 
     public function navigateQuestionChat():AinQuestionChatNavigator
