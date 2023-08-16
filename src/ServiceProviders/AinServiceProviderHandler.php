@@ -29,6 +29,7 @@ use IanRothmann\Ain\Handlers\Lib\AinSummarizeContext;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizeConversation;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizeTranscription;
+use IanRothmann\Ain\Handlers\Lib\AinTextGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinThematicAnalysis;
 use IanRothmann\Ain\Handlers\Lib\AinThematicAnalysisInclusionDecision;
 use IanRothmann\Ain\Handlers\Lib\AinThemeExtractor;
@@ -49,6 +50,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function generateText():AinTextGenerator
+    {
+        return new AinTextGenerator($this->config);
     }
 
     public function writeInterviewReport():AinInterviewReportWriter
