@@ -23,6 +23,7 @@ use IanRothmann\Ain\Handlers\Lib\AinRatingClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinRatingModelBuilder;
 use IanRothmann\Ain\Handlers\Lib\AinRewriter;
 use IanRothmann\Ain\Handlers\Lib\AinSentimentClassifier;
+use IanRothmann\Ain\Handlers\Lib\AinSlugGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
 use IanRothmann\Ain\Handlers\Lib\AinSQLDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizeContext;
@@ -51,6 +52,12 @@ class AinServiceProviderHandler
     {
         $this->config=$config;
     }
+
+    public function generateSlug():AinSlugGenerator
+    {
+        return new AinSlugGenerator($this->config);
+    }
+
 
     public function generateText():AinTextGenerator
     {
