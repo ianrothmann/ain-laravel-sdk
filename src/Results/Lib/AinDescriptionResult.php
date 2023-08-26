@@ -15,19 +15,19 @@ class AinDescriptionResult extends AinResult
     public function __construct($httpResultArray)
     {
         parent::__construct($httpResultArray);
-        $this->text=collect($this->data->get('text'));
+        $this->text=collect($this->data)->get('text');
         $this->complement=collect($this->data->get('additional'))->get('complement');
         $this->rawData=collect($this->data->get('additional'))->get('raw_data');
     }
 
     public function getDescription()
     {
-        return $this->text;
+        return trim($this->text);
     }
 
     public function getComplement()
     {
-        return $this->complement;
+        return trim($this->complement);
     }
 
     public function getRawData()

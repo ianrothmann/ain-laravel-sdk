@@ -14,23 +14,23 @@ class AinTranscriptionResult extends AinResult
     public function __construct($httpResultArray)
     {
         parent::__construct($httpResultArray);
-        $this->text=collect($this->data->get('text'));
+        $this->text=collect($this->data)->get('text');
         $this->summary=collect($this->data->get('additional'))->get('summary');
         $this->complement=collect($this->data->get('additional'))->get('complement');
     }
 
     public function getText()
     {
-        return $this->text;
+        return trim($this->text);
     }
 
     public function getSummary()
     {
-        return $this->summary;
+        return trim($this->summary);
     }
 
     public function getComplement()
     {
-        return $this->complement;
+        return trim($this->complement);
     }
 }
