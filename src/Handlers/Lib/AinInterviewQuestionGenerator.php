@@ -3,13 +3,13 @@
 namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
+use IanRothmann\Ain\Results\Lib\AinInterviewQuestionResult;
 use IanRothmann\Ain\Results\Lib\AinListResult;
 use IanRothmann\Ain\Results\Lib\AinSummaryResult;
 
 class AinInterviewQuestionGenerator extends AinHandler
 {
     protected $inputText;
-    protected $answerFormat;
 
     protected string $endpoint='nlp/interview_questions';
 
@@ -19,38 +19,45 @@ class AinInterviewQuestionGenerator extends AinHandler
         return $this;
     }
 
-    public function inAnswerFormat($answerFormatAsSentence)
-    {
-        $this->answerFormat=$answerFormatAsSentence;
-        return $this;
-    }
-
     /**
-     * @return AinListResult
+     * @return AinInterviewQuestionResult
      */
     public function getResult()
     {
         $result=$this->post([
             'text'=>$this->inputText,
-            'answer_format'=>$this->answerFormat,
         ]);
-        return new AinListResult($result);
+        return new AinInterviewQuestionResult($result);
     }
 
     /**
-     * @return AinListResult
+     * @return AinInterviewQuestionResult
      */
     public function getMocked()
     {
         $result=[
             'data'=>[
-                'list'=>[
-                    'What is your greatest weakness?',
-                    'What is your greatest strength?',
+                'table'=>[
+                    [
+                        'question'=>'Question 1',
+                        'question_format'=>'audio',
+                        'options'=>[],
+                        'required'=>1
+                    ],
+                    [
+                        'question'=>'Question 2',
+                        'question_format'=>'What is your favourite drink',
+                        'options'=>[
+                            'Coke',
+                            'Pepsi',
+                            'Fanta'
+                        ],
+                        'required'=>0
+                    ]
                 ],
                 'original'=>$this->inputText,
             ]
         ];
-        return new AinListResult($result);
+        return new AinInterviewQuestionResult($result);
     }
 }
