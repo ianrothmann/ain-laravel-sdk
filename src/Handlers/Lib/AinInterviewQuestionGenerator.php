@@ -40,13 +40,13 @@ class AinInterviewQuestionGenerator extends AinHandler
                 'table'=>[
                     [
                         'question'=>'Question 1',
-                        'question_format'=>'audio',
+                        'answer_format'=>'audio',
                         'options'=>[],
                         'required'=>1
                     ],
                     [
                         'question'=>'Question 2',
-                        'question_format'=>'What is your favourite drink',
+                        'answer_format'=>'What is your favourite drink',
                         'options'=>[
                             'Coke',
                             'Pepsi',
