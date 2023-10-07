@@ -4,6 +4,7 @@ namespace IanRothmann\Ain\ServiceProviders;
 
 use IanRothmann\Ain\Handlers\AinHandlerConfig;
 use IanRothmann\Ain\Handlers\Lib\AinAnalysis;
+use IanRothmann\Ain\Handlers\Lib\AinAudioPronunciation;
 use IanRothmann\Ain\Handlers\Lib\AinAudioTopicExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinAudioTranscriber;
 use IanRothmann\Ain\Handlers\Lib\AinDataset;
@@ -51,6 +52,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function checkPronunciation(): AinAudioPronunciation
+    {
+        return new AinAudioPronunciation($this->config);
     }
 
     public function generateSlug():AinSlugGenerator
