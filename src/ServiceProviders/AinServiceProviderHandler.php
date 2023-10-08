@@ -7,9 +7,12 @@ use IanRothmann\Ain\Handlers\Lib\AinAnalysis;
 use IanRothmann\Ain\Handlers\Lib\AinAudioPronunciation;
 use IanRothmann\Ain\Handlers\Lib\AinAudioTopicExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinAudioTranscriber;
+use IanRothmann\Ain\Handlers\Lib\AinAudioUnderstandingRater;
 use IanRothmann\Ain\Handlers\Lib\AinDataset;
 use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
 use IanRothmann\Ain\Handlers\Lib\AinFaceDescriber;
+use IanRothmann\Ain\Handlers\Lib\AinIdealResponseGenerator;
+use IanRothmann\Ain\Handlers\Lib\AinIdealResponseRater;
 use IanRothmann\Ain\Handlers\Lib\AinImageDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewQuestionGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewReportWriter;
@@ -41,6 +44,7 @@ use IanRothmann\Ain\Handlers\Lib\AinTopicDescriptionsToNames;
 use IanRothmann\Ain\Handlers\Lib\AinTopicFromList;
 use IanRothmann\Ain\Handlers\Lib\AinTopicProbe;
 use IanRothmann\Ain\Handlers\Lib\AinTraitSummarizer;
+use IanRothmann\Ain\Handlers\Lib\AinWritingQualityRater;
 use IanRothmann\Ain\Results\Lib\AinModelResult;
 
 
@@ -52,6 +56,26 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function rateIdealResponse():AinIdealResponseRater
+    {
+        return new AinIdealResponseRater($this->config);
+    }
+
+    public function generateIdealResponse():AinIdealResponseGenerator
+    {
+        return new AinIdealResponseGenerator($this->config);
+    }
+
+    public function rateWritingQuality():AinWritingQualityRater
+    {
+        return new AinWritingQualityRater($this->config);
+    }
+
+    public function rateAudioUnderstanding():AinAudioUnderstandingRater
+    {
+        return new AinAudioUnderstandingRater($this->config);
     }
 
     public function checkPronunciation(): AinAudioPronunciation
