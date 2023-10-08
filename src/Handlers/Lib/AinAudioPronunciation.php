@@ -58,9 +58,12 @@ class AinAudioPronunciation extends AinHandler
         $result=[
             'data'=>[
                 'success'=>true,
+                'overall'=>100.0,
                 'accuracy'=>100.0,
+                'fluency'=>100.0,
+                'completeness'=>100.0,
                 'confidence'=>100.0,
-                'maskedITN'=>'Text',
+                'lexical'=>'Text',
                 'displayText'=>'Text',
             ]
         ];
