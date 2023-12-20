@@ -11,11 +11,14 @@ use IanRothmann\Ain\Handlers\Lib\AinAudioUnderstandingRater;
 use IanRothmann\Ain\Handlers\Lib\AinDataset;
 use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
 use IanRothmann\Ain\Handlers\Lib\AinFaceDescriber;
+use IanRothmann\Ain\Handlers\Lib\AinIdealResponseCandidateSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinIdealResponseGenerator;
+use IanRothmann\Ain\Handlers\Lib\AinIdealResponseMultipleGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinIdealResponseRater;
 use IanRothmann\Ain\Handlers\Lib\AinImageDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewQuestionGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewReportWriter;
+use IanRothmann\Ain\Handlers\Lib\AinJobDescriptionSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinModel;
 use IanRothmann\Ain\Handlers\Lib\AinMultiStatementSummarizer;
@@ -58,6 +61,16 @@ class AinServiceProviderHandler
         $this->config=$config;
     }
 
+    public function summarizeJobDescriptionForInterview():AinJobDescriptionSummarizer
+    {
+        return new AinJobDescriptionSummarizer($this->config);
+    }
+
+    public function idealResponseCandidateSummary():AinIdealResponseCandidateSummarizer
+    {
+        return new AinIdealResponseCandidateSummarizer($this->config);
+    }
+
     public function rateIdealResponse():AinIdealResponseRater
     {
         return new AinIdealResponseRater($this->config);
@@ -67,6 +80,12 @@ class AinServiceProviderHandler
     {
         return new AinIdealResponseGenerator($this->config);
     }
+
+    public function generateIdealResponses():AinIdealResponseMultipleGenerator
+    {
+        return new AinIdealResponseMultipleGenerator($this->config);
+    }
+
 
     public function rateWritingQuality():AinWritingQualityRater
     {
