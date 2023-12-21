@@ -8,6 +8,7 @@ use IanRothmann\Ain\Handlers\Lib\AinAudioPronunciation;
 use IanRothmann\Ain\Handlers\Lib\AinAudioTopicExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinAudioTranscriber;
 use IanRothmann\Ain\Handlers\Lib\AinAudioUnderstandingRater;
+use IanRothmann\Ain\Handlers\Lib\AinCandidateStrengthsShortcomingsGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinDataset;
 use IanRothmann\Ain\Handlers\Lib\AinEmbeddings;
 use IanRothmann\Ain\Handlers\Lib\AinFaceDescriber;
@@ -59,6 +60,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function generateStrengthsAndShortcomings():AinCandidateStrengthsShortcomingsGenerator
+    {
+        return new AinCandidateStrengthsShortcomingsGenerator($this->config);
     }
 
     public function summarizeJobDescriptionForInterview():AinJobDescriptionSummarizer
