@@ -12,7 +12,7 @@ class AinTranslationResult extends AinResult
     public function __construct($httpResultArray)
     {
         parent::__construct($httpResultArray);
-        $this->translations=collect($this->data->get('table'))->last();
+        $this->translations=collect(collect($this->data->get('table'))->last());
     }
 
     public function getTranslations():Collection

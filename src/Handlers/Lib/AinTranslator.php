@@ -12,6 +12,7 @@ use IanRothmann\Ain\Results\Lib\AinTranslationResult;
 class AinTranslator extends AinHandler
 {
     protected $languages = [];
+    protected $parameters = [];
 
     protected $text;
 
@@ -32,6 +33,12 @@ class AinTranslator extends AinHandler
         return $this;
     }
 
+    public function retainParameters($parameters)
+    {
+        $this->parameters=$parameters;
+        return $this;
+    }
+
     /**
      * @return AinTranslationResult
      */
@@ -40,6 +47,7 @@ class AinTranslator extends AinHandler
         $result=$this->post([
             'languages'=>$this->languages,
             'text'=>$this->text,
+            'parameters'=>$this->parameters,
         ]);
         return new AinTranslationResult($result);
     }
