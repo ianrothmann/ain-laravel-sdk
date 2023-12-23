@@ -48,6 +48,7 @@ use IanRothmann\Ain\Handlers\Lib\AinTopicDescriptionsToNames;
 use IanRothmann\Ain\Handlers\Lib\AinTopicFromList;
 use IanRothmann\Ain\Handlers\Lib\AinTopicProbe;
 use IanRothmann\Ain\Handlers\Lib\AinTraitSummarizer;
+use IanRothmann\Ain\Handlers\Lib\AinTranslator;
 use IanRothmann\Ain\Handlers\Lib\AinWritingQualityRater;
 use IanRothmann\Ain\Results\Lib\AinModelResult;
 
@@ -60,6 +61,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function translate():AinTranslator
+    {
+        return new AinTranslator($this->config);
     }
 
     public function generateStrengthsAndShortcomings():AinCandidateStrengthsShortcomingsGenerator
