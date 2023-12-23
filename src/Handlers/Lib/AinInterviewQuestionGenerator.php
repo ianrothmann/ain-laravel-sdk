@@ -3,12 +3,15 @@
 namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
+use IanRothmann\Ain\Handlers\Lib\Traits\LanguageSupport;
 use IanRothmann\Ain\Results\Lib\AinInterviewQuestionResult;
 use IanRothmann\Ain\Results\Lib\AinListResult;
 use IanRothmann\Ain\Results\Lib\AinSummaryResult;
 
 class AinInterviewQuestionGenerator extends AinHandler
 {
+    use LanguageSupport;
+
     protected $inputText;
 
     protected string $endpoint='nlp/interview_questions';

@@ -3,11 +3,13 @@
 namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
+use IanRothmann\Ain\Handlers\Lib\Traits\LanguageSupport;
 use IanRothmann\Ain\Results\Lib\AinSummaryResult;
 use IanRothmann\Ain\Results\Lib\AinTextResult;
 
 class AinTextGenerator extends AinHandler
 {
+    use LanguageSupport;
     protected $input = [];
 
     protected string $endpoint='nlp/generate_text';

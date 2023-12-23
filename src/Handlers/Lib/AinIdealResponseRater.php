@@ -3,11 +3,13 @@
 namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
+use IanRothmann\Ain\Handlers\Lib\Traits\LanguageSupport;
 use IanRothmann\Ain\Results\Lib\AinScoringResult;
 use IanRothmann\Ain\Results\Lib\AinSummaryResult;
 
 class AinIdealResponseRater extends AinHandler
 {
+    use LanguageSupport;
     protected $question;
     protected $responseText;
     protected $jobDescription;

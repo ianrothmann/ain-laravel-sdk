@@ -2,6 +2,7 @@
 
 namespace IanRothmann\Ain\Handlers;
 
+use IanRothmann\Ain\Handlers\Lib\Traits\LanguageSupport;
 use IanRothmann\Ain\Http\AinHttp;
 use Illuminate\Http\Client\Pool;
 use Illuminate\Support\Facades\Cache;
@@ -45,9 +46,18 @@ abstract class AinHandler
         return $this->http->get($this->endpoint,$params);
     }
 
+    private function usesLanguageSupport()
+    {
+        return in_array(LanguageSupport::class,class_uses($this));
+    }
+
     protected function post($opts=[])
     {
         $opts=collect($opts);
+        if($this->usesLanguageSupport()){
+            $opts['output_language_name']=$this->languageName;
+            $opts['output_language_code']=$this->languageCode;
+        }
         return $this->http->post($this->endpoint,$opts);
     }
 
@@ -60,6 +70,10 @@ abstract class AinHandler
         }
         $opts=collect($opts);
         $opts['text']=$text;
+        if($this->usesLanguageSupport()){
+            $opts['output_language_name']=$this->languageName;
+            $opts['output_language_code']=$this->languageCode;
+        }
         return $this->http->post($this->endpoint,$opts);
     }
 
@@ -67,6 +81,10 @@ abstract class AinHandler
     {
         $opts=collect($opts);
         $opts['text']=$textArray;
+        if($this->usesLanguageSupport()){
+            $opts['output_language_name']=$this->languageName;
+            $opts['output_language_code']=$this->languageCode;
+        }
         return $this->http->post($this->endpoint,$opts);
     }
 
@@ -74,6 +92,10 @@ abstract class AinHandler
     {
         $opts=collect($opts);
         $opts['list']=$list;
+        if($this->usesLanguageSupport()){
+            $opts['output_language_name']=$this->languageName;
+            $opts['output_language_code']=$this->languageCode;
+        }
         return $this->http->post($this->endpoint,$opts->toArray());
     }
 

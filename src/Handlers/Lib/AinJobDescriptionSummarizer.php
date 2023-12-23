@@ -3,12 +3,15 @@
 namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
+use IanRothmann\Ain\Handlers\Lib\Traits\LanguageSupport;
 use IanRothmann\Ain\Results\Lib\AinJobDescriptionResult;
 use IanRothmann\Ain\Results\Lib\AinSummaryResult;
 use IanRothmann\Ain\Results\Lib\AinTableResult;
 
 class AinJobDescriptionSummarizer extends AinHandler
 {
+    use LanguageSupport;
+
     protected $questions = [];
     protected $text;
 

@@ -3,11 +3,13 @@
 namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
+use IanRothmann\Ain\Handlers\Lib\Traits\LanguageSupport;
 use IanRothmann\Ain\Results\Lib\AinIntentResult;
 use IanRothmann\Ain\Results\Lib\AinSummaryResult;
 
 class AinQuestionChatNavigator extends AinHandler
 {
+    use LanguageSupport;
     protected $questionsByNumberArray;
     protected $userResponse;
     protected $userContext;

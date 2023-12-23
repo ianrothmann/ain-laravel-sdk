@@ -3,12 +3,15 @@
 namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
+use IanRothmann\Ain\Handlers\Lib\Traits\LanguageSupport;
 use IanRothmann\Ain\Results\Lib\AinStrengthsShortcomingsResult;
 use IanRothmann\Ain\Results\Lib\AinSummaryResult;
 use IanRothmann\Ain\Results\Lib\AinTableResult;
 
 class AinCandidateStrengthsShortcomingsGenerator extends AinHandler
 {
+    use LanguageSupport;
+
     protected $ratings = [];
 
     protected $context;

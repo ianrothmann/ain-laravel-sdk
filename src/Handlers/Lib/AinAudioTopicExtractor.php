@@ -3,6 +3,7 @@
 namespace IanRothmann\Ain\Handlers\Lib;
 
 use IanRothmann\Ain\Handlers\AinHandler;
+use IanRothmann\Ain\Handlers\Lib\Traits\LanguageSupport;
 use IanRothmann\Ain\Results\Lib\AinAudioTopicsResult;
 use IanRothmann\Ain\Results\Lib\AinDescriptionResult;
 use IanRothmann\Ain\Results\Lib\AinFaceResult;
@@ -11,6 +12,8 @@ use IanRothmann\Ain\Results\Lib\AinTranscriptionResult;
 
 class AinAudioTopicExtractor extends AinHandler
 {
+    use LanguageSupport;
+
     protected string $url;
     protected $name;
 

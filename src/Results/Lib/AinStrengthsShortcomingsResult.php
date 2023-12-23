@@ -14,7 +14,7 @@ class AinStrengthsShortcomingsResult extends AinResult
     public function __construct($httpResultArray)
     {
         parent::__construct($httpResultArray);
-        $temp=collect($this->data->get('table'))->first();
+        $temp=collect($this->data->get('table'))->last();
         $this->strengths=$temp['strengths'];
         $this->shortcomings=$temp['shortcomings'];
     }
