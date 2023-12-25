@@ -29,6 +29,7 @@ use IanRothmann\Ain\Handlers\Lib\AinQuestionAnswering;
 use IanRothmann\Ain\Handlers\Lib\AinQuestionChatNavigator;
 use IanRothmann\Ain\Handlers\Lib\AinRatingClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinRatingModelBuilder;
+use IanRothmann\Ain\Handlers\Lib\AinResumeAnalyzer;
 use IanRothmann\Ain\Handlers\Lib\AinRewriter;
 use IanRothmann\Ain\Handlers\Lib\AinSentimentClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinSlugGenerator;
@@ -62,6 +63,12 @@ class AinServiceProviderHandler
     {
         $this->config=$config;
     }
+
+    public function analyzeResume():AinResumeAnalyzer
+    {
+        return new AinResumeAnalyzer($this->config);
+    }
+
 
     public function translate():AinTranslator
     {
