@@ -12,7 +12,7 @@ abstract class AinResult
     {
         $httpResultArray=collect($httpResultArray);
 
-        if($httpResultArray->has('error')){
+        if($httpResultArray->get('error')){
             throw new \Exception($httpResultArray->get('error'));
         }
 

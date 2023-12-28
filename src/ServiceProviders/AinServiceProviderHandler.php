@@ -17,7 +17,9 @@ use IanRothmann\Ain\Handlers\Lib\AinIdealResponseGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinIdealResponseMultipleGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinIdealResponseRater;
 use IanRothmann\Ain\Handlers\Lib\AinImageDescriber;
+use IanRothmann\Ain\Handlers\Lib\AinInterviewQualityAssessor;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewQuestionGenerator;
+use IanRothmann\Ain\Handlers\Lib\AinInterviewQuestionProber;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewReportWriter;
 use IanRothmann\Ain\Handlers\Lib\AinJobDescriptionSummarizer;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
@@ -62,6 +64,16 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function assessInterviewQuality():AinInterviewQualityAssessor
+    {
+        return new AinInterviewQualityAssessor($this->config);
+    }
+
+    public function probeInterviewQuestion():AinInterviewQuestionProber
+    {
+        return new AinInterviewQuestionProber($this->config);
     }
 
     public function analyzeResume():AinResumeAnalyzer
