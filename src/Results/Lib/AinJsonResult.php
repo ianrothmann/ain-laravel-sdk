@@ -14,11 +14,11 @@ class AinJsonResult extends AinResult
     {
         parent::__construct($httpResultArray);
 
-        $this->result=collect($this->data->get('data'));
+        $this->result=collect($this->data->get('json'));
     }
 
     public function getResult(): Collection
     {
-        return $this->data;
+        return $this->result;
     }
 }
