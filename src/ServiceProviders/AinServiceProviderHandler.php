@@ -22,6 +22,7 @@ use IanRothmann\Ain\Handlers\Lib\AinInterviewQuestionGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewQuestionProber;
 use IanRothmann\Ain\Handlers\Lib\AinInterviewReportWriter;
 use IanRothmann\Ain\Handlers\Lib\AinJobDescriptionSummarizer;
+use IanRothmann\Ain\Handlers\Lib\AinJsonGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinKeywordExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinModel;
 use IanRothmann\Ain\Handlers\Lib\AinMultiStatementSummarizer;
@@ -58,12 +59,16 @@ use IanRothmann\Ain\Results\Lib\AinModelResult;
 
 class AinServiceProviderHandler
 {
-
     protected AinHandlerConfig $config;
 
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function generateJson():AinJsonGenerator
+    {
+        return new AinJsonGenerator($this->config);
     }
 
     public function assessInterviewQuality():AinInterviewQualityAssessor
