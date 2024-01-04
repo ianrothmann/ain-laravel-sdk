@@ -16,6 +16,7 @@ class AinAudioTopicExtractor extends AinHandler
 
     protected string $url;
     protected $name;
+    protected $context;
 
     protected string $endpoint='audio/topics';
 
@@ -31,6 +32,12 @@ class AinAudioTopicExtractor extends AinHandler
         return $this;
     }
 
+    public function withContext($context)
+    {
+        $this->context=$context;
+        return $this;
+    }
+
 
     /**
      * @return AinAudioTopicsResult
@@ -43,6 +50,10 @@ class AinAudioTopicExtractor extends AinHandler
 
         if($this->name){
             $data['name']=$this->name;
+        }
+
+        if($this->context){
+            $data['context']=$this->context;
         }
 
         $result=$this->post($data);
