@@ -13,6 +13,11 @@ class AinResumeAnalysisResult extends AinResult
         parent::__construct($httpResultArray);
     }
 
+    public function isValidResume():?bool
+    {
+        return $this->data->get('is_resume');
+    }
+
     public function getName():?string
     {
         return $this->data->get('name');
