@@ -7,6 +7,7 @@ use IanRothmann\Ain\Handlers\Lib\Traits\LanguageSupport;
 use IanRothmann\Ain\Results\Lib\AinDescriptionResult;
 use IanRothmann\Ain\Results\Lib\AinFaceResult;
 use IanRothmann\Ain\Results\Lib\AinKeywordsResult;
+use IanRothmann\Ain\Results\Lib\AinSRTResult;
 use IanRothmann\Ain\Results\Lib\AinTranscriptionResult;
 
 class AinAudioSRTTranscriber extends AinHandler
@@ -74,7 +75,7 @@ class AinAudioSRTTranscriber extends AinHandler
     }
 
     /**
-     * @return AinTranscriptionResult
+     * @return AinSRTResult
      */
     public function getResult()
     {
@@ -89,11 +90,11 @@ class AinAudioSRTTranscriber extends AinHandler
             'topics'=>$this->shouldOutputTopics,
         ]);
 
-        return new AinTranscriptionResult($result);
+        return new AinSRTResult($result);
     }
 
     /**
-     * @return AinTranscriptionResult
+     * @return AinSRTResult
      */
     public function getMocked()
     {
@@ -103,9 +104,15 @@ class AinAudioSRTTranscriber extends AinHandler
                 'additional'=>[
                     'summary'=>'Summary',
                     'complement'=>'Complement',
+                    'topics'=>[
+                        'topic1',
+                        'topic2'
+                    ],
+                    'srt'=>'SRT',
+                    'original_srt'=>'Original SRT'
                 ]
             ]
         ];
-        return new AinTranscriptionResult($result);
+        return new AinSRTResult($result);
     }
 }
