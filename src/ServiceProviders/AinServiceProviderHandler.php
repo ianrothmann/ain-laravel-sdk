@@ -5,6 +5,7 @@ namespace IanRothmann\Ain\ServiceProviders;
 use IanRothmann\Ain\Handlers\AinHandlerConfig;
 use IanRothmann\Ain\Handlers\Lib\AinAnalysis;
 use IanRothmann\Ain\Handlers\Lib\AinAudioPronunciation;
+use IanRothmann\Ain\Handlers\Lib\AinAudioSRTTranscriber;
 use IanRothmann\Ain\Handlers\Lib\AinAudioTopicExtractor;
 use IanRothmann\Ain\Handlers\Lib\AinAudioTranscriber;
 use IanRothmann\Ain\Handlers\Lib\AinAudioUnderstandingRater;
@@ -177,6 +178,11 @@ class AinServiceProviderHandler
     public function transcribe():AinAudioTranscriber
     {
         return new AinAudioTranscriber($this->config);
+    }
+
+    public function transcribeToSRT():AinAudioSRTTranscriber
+    {
+        return new AinAudioSRTTranscriber($this->config);
     }
 
     public function analyzeFace(): AinFaceDescriber
