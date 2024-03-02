@@ -14,9 +14,29 @@ class AinTextGenerator extends AinHandler
 
     protected string $endpoint='nlp/generate_text';
 
+    protected string $creativity='high';
+
     public function addInstruction($text)
     {
         $this->input[]=$text;
+        return $this;
+    }
+
+    public function withHighCreativity()
+    {
+        $this->creativity='high';
+        return $this;
+    }
+
+    public function withMediumCreativity()
+    {
+        $this->creativity='medium';
+        return $this;
+    }
+
+    public function withLowCreativity()
+    {
+        $this->creativity='low';
         return $this;
     }
 
@@ -27,6 +47,7 @@ class AinTextGenerator extends AinHandler
     {
         $result=$this->post([
             'instructions'=>$this->input,
+            'creativity'=>$this->creativity
         ]);
         return new AinTextResult($result);
     }
