@@ -33,6 +33,7 @@ use IanRothmann\Ain\Handlers\Lib\AinQuestionAnswering;
 use IanRothmann\Ain\Handlers\Lib\AinQuestionChatNavigator;
 use IanRothmann\Ain\Handlers\Lib\AinRatingClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinRatingModelBuilder;
+use IanRothmann\Ain\Handlers\Lib\AinResponseRaterToMultipleScoringGuides;
 use IanRothmann\Ain\Handlers\Lib\AinResponseRaterToScoringGuide;
 use IanRothmann\Ain\Handlers\Lib\AinResumeAnalyzer;
 use IanRothmann\Ain\Handlers\Lib\AinRewriter;
@@ -66,6 +67,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function rateMultipleWithScoringGuides():AinResponseRaterToMultipleScoringGuides
+    {
+        return new AinResponseRaterToMultipleScoringGuides($this->config);
     }
 
     public function rateWithScoringGuide():AinResponseRaterToScoringGuide
