@@ -11,6 +11,7 @@ class AinInterviewReportWriter extends AinHandler
     protected $questionAnswerArray;
     protected $name;
     protected $jobDescription;
+    protected $context;
 
     protected string $endpoint='nlp/interview_report';
 
@@ -32,6 +33,12 @@ class AinInterviewReportWriter extends AinHandler
         return $this;
     }
 
+    public function withContext($context)
+    {
+        $this->context=$context;
+        return $this;
+    }
+
     /**
      * @return AinSummaryResult
      */
@@ -41,6 +48,7 @@ class AinInterviewReportWriter extends AinHandler
             'qa'=>$this->questionAnswerArray,
             'name'=>$this->name,
             'job_description'=>$this->jobDescription,
+            'context'=>$this->context
         ]);
         return new AinSummaryResult($result);
     }
