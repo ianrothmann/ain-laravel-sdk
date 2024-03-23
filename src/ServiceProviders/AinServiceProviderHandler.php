@@ -39,6 +39,7 @@ use IanRothmann\Ain\Handlers\Lib\AinResumeAnalyzer;
 use IanRothmann\Ain\Handlers\Lib\AinRewriter;
 use IanRothmann\Ain\Handlers\Lib\AinSentimentClassifier;
 use IanRothmann\Ain\Handlers\Lib\AinSlugGenerator;
+use IanRothmann\Ain\Handlers\Lib\AinSpeechGenerator;
 use IanRothmann\Ain\Handlers\Lib\AinSpellingGrammar;
 use IanRothmann\Ain\Handlers\Lib\AinSQLDescriber;
 use IanRothmann\Ain\Handlers\Lib\AinSummarizeContext;
@@ -67,6 +68,11 @@ class AinServiceProviderHandler
     public function __construct(AinHandlerConfig $config)
     {
         $this->config=$config;
+    }
+
+    public function generateSpeech():AinSpeechGenerator
+    {
+        return new AinSpeechGenerator($this->config);
     }
 
     public function rateMultipleWithScoringGuides():AinResponseRaterToMultipleScoringGuides

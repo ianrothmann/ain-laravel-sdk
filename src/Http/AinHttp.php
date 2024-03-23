@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 class AinHttp
 {
-    protected $url;
+    public $url;
     protected $version='v1';
     public $key;
     protected $shouldMock=false;
@@ -99,6 +99,34 @@ class AinHttp
         }
 
 
+    }
+
+    public function postWithRawResponse($endpoint, $data)
+    {
+        $url=$this->url.'/api/'.$this->version.'/'.$endpoint;
+
+        if($this->shouldMock){
+            $data['mock']=1;
+        }
+
+        if(!$this->shouldCache){
+            $data['force']=1;
+        }
+
+        $data=collect($data)->toArray();
+
+        try{
+            return Http::withToken($this->key)
+                ->acceptJson()
+                ->timeout(180)
+                ->retry(3,500)
+                ->post($url,$data)
+                ->throw(function($response, $e){
+                    return $e;
+                })->body();
+        }catch (\Throwable $e){
+            throw new \Exception($e->getMessage());
+        }
     }
 
 }

@@ -61,6 +61,16 @@ abstract class AinHandler
         return $this->http->post($this->endpoint,$opts);
     }
 
+    protected function postWithRawResponse($opts=[])
+    {
+        $opts=collect($opts);
+        if($this->usesLanguageSupport()){
+            $opts['output_language_name']=$this->languageName;
+            $opts['output_language_code']=$this->languageCode;
+        }
+        return $this->http->postWithRawResponse($this->endpoint,$opts);
+    }
+
     protected function postText($text, $opts=[])
     {
         if(collect($text)->count()>1){
