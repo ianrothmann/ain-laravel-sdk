@@ -13,7 +13,7 @@ class AinNameSurnameResult extends AinResult
     public function __construct($httpResultArray)
     {
         parent::__construct($httpResultArray);
-        $this->result=collect($this->data->get('list'));
+        $this->result=collect($this->data->get('json'));
     }
 
     public function getData():Collection
